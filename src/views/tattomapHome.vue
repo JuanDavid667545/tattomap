@@ -11,6 +11,11 @@
       <h1>¿Quieres un tatuaje?</h1>
       <p>TE FACILITAMOS ENCONTRANDOLO, CON QUIÉN Y DONDE</p>
       <button @click="comenzarBusqueda">EMPEZAR</button>
+      
+      <div class="botones-acciones">
+        <button @click="irContacenos" class="contactenos-btn">Contáctenos</button>
+        <button @click="irRegistro" class="registro-btn">Registrarse</button>
+      </div>
     </main>
   </div>
 </template>
@@ -35,6 +40,12 @@ export default {
     },
     comenzarBusqueda() {
       console.log('Iniciando la búsqueda de tatuajes desde la página de inicio');
+    },
+    irRegistro() {
+      this.$router.push('/registro-usuario');
+    },
+    irContacenos() {
+      this.$router.push('/Contactenos');
     }
   }
 };
@@ -47,6 +58,7 @@ export default {
   font-family: Arial, sans-serif;
   height: 100vh;
   padding: 20px;
+  position: relative;
 }
 
 nav ul {
@@ -54,7 +66,7 @@ nav ul {
   display: flex;
   justify-content: flex-start;
   padding: 0;
-  margin-bottom: 50px; /* Aumenta la separación entre el menú y el contenido */
+  margin-bottom: 50px;
 }
 
 nav ul li {
@@ -74,7 +86,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(60vh - 40px); /* Deja espacio para el menú */
+  height: calc(60vh - 40px);
   text-align: center;
 }
 
@@ -96,9 +108,41 @@ button {
   font-size: 18px;
   cursor: pointer;
   margin-top: 20px;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
+  background-color: #555;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Estilos para los botones de acción */
+.botones-acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  position: absolute;
+  right: 20px; /* Posicionar en la parte derecha de la pantalla */
+  top: 20px;
+}
+
+.contactenos-btn,
+.registro-btn {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.contactenos-btn:hover,
+.registro-btn:hover {
   background-color: #555;
 }
 </style>

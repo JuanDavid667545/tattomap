@@ -1,7 +1,7 @@
 <template>
   <div class="Registro">
     <h1>Registro</h1>
-    <p>¡Rellena nuestro formulario!</p>
+    <p>¡Este formulario es unico para tatuadores!</p>
 
     <form @submit.prevent="enviarFormulario">
 
