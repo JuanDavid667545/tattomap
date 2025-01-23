@@ -1,125 +1,170 @@
 <template>
-  <div class="Registro">
-    <h1>Registro</h1>
-    <p>¡Este formulario es unico para tatuadores!</p>
-
-    <form @submit.prevent="enviarFormulario">
-
-      <div class="campo">
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" v-model="nombre" placeholder="Añade tu nombre">
-      </div>
-
-      <div class="campo">
-        <label for="telefono">Teléfono</label>
-        <div class="telefono-input">
-          <input type="text" value="+57" disabled>
-          <input type="tel" id="telefono" v-model="telefono" placeholder="Número de teléfono">
+  <div class="registro-container">
+    <div class="registro-form">
+      <h2>Registro de Tatuador</h2>
+      <!--formulario-->
+      <form @submit.prevent="registrarTatuador">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            v-model="tatuador.nombre"
+            required
+            placeholder="Ingresa tu nombre"
+          />
         </div>
-      </div>
 
-      <div class="campo">
-        <label for="email">Email</label>
-        <input type="email" id="email" v-model="email" placeholder="Añade tu email">
-      </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <div class="telefono-input">
+            <input type="text" value="+57" disabled />
+            <input
+              type="tel"
+              id="telefono"
+              v-model="tatuador.telefono"
+              placeholder="Número de teléfono (opcional)"
+            />
+          </div>
+        </div>
 
-      <div class="campo">
-        <label for="Contraseña">Contraseña</label>
-        <input type="text" id="contraseña" v-model="Contraseña" placeholder="Ingresa tu contraseña">
-      </div>
+        <div class="form-group">
+          <label for="email">Correo Electrónico</label>
+          <input
+            type="email"
+            id="email"
+            v-model="tatuador.email"
+            required
+            placeholder="Ingresa tu correo"
+          />
+        </div>
 
-      <div class="campo">
-        <label for="instagram">Perfil de Instagram</label>
-        <input type="text" id="instagram" v-model="instagram" placeholder="Añade tu perfil">
-      </div>
 
-      <div class="campo">
-        <label for="ciudad">Ciudad</label>
-        <select id="ciudad" v-model="ciudad">
-          <option value="" disabled selected>Selecciona tu ciudad</option>
-          <option v-for="ciudad in ciudades" :key="ciudad" :value="ciudad">{{ ciudad }}</option>
-        </select>
-      </div>
+        <div class="form-group">
+          <label for="instgram">Instgram</label>
+          <div class="instagram-input">
+            <input
+              type="instagram"
+              id="instagramuser"
+              v-model="tatuador.instagram"
+              required
+              placeholder="Usuario de intagram"
+            />
+          </div>
+        </div>
 
-      <button type="submit">ENVIAR</button>
-    </form>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input
+            type="password"
+            id="password"
+            v-model="tatuador.password"
+            required
+            placeholder="Ingresa tu contraseña"
+          />
+        </div>
 
-    <!-- Botón Volver -->
-    <button class="boton-volver" @click="volverAlInicio">Volver</button>
+        <div class="form-group">
+          <label for="ciudad">Ciudad</label>
+          <select id="ciudad" v-model="tatuador.ciudad" required>
+            <option value="" disabled selected>Selecciona tu ciudad</option>
+            <option v-for="ciudad in ciudades" :key="ciudad" :value="ciudad">
+              {{ ciudad }}
+            </option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-btn">Registrarse</button>
+        <button @click="volver" type="button" class="volver-btn">Volver</button>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'tattoRegister',
+  name: "RegistroTatuador",
   data() {
     return {
-      nombre: '',
-      telefono: '',
-      email: '',
-      instagram: '',
-      ciudad: '',
-      ciudades: ['Villavicencio'] // Añade más ciudades según necesites
+      tatuador: {
+        nombre: "",
+        telefono: "",
+        email: "",
+        password: "",
+        ciudad: "",
+      },
+      ciudades: ["Villavicencio"], // Agrega más ciudades según sea necesario
     };
   },
   methods: {
-    enviarFormulario() {
-      // Aquí puedes añadir la lógica para enviar el formulario
-      console.log('Formulario enviado', {
-        nombre: this.nombre,
-        telefono: this.telefono,
-        email: this.email,
-        instagram: this.instagram,
-        ciudad: this.ciudad
-      });
-      // Implementa la lógica de envío real aquí
+    registrarTatuador() {
+      console.log("Datos del tatuador:", this.tatuador);
     },
-    volverAlInicio() {
-      this.$router.push('/'); // Redirección a la página de inicio
-    }
-  }
-}
+    volver() {
+      this.$router.push("/");
+    },
+  },
+};
 </script>
 
 <style scoped>
-.Registro {
+
+
+
+/* css */
+
+/**contenetor */
+.registro-container {
   background-color: #000;
-  color: #fff;
-  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
+}
+
+.registro-form {
+  background-color: #1a1a1a;
+  padding: 40px;
+  border-radius: 10px;
+  width: 100%;
   max-width: 400px;
-  margin: 50px auto; /* Centra el componente verticalmente */
-  text-align: center; /* Centra el contenido */
 }
 
-h1 {
+h2 {
+  color: #fff;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  margin-bottom: 30px;
   font-size: 24px;
-  margin-bottom: 10px;
 }
 
-p {
-  font-size: 14px;
+.form-group {
   margin-bottom: 20px;
-}
-
-.campo {
-  margin-bottom: 15px;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
+  color: #fff;
+  margin-bottom: 8px;
+  font-size: 16px;
 }
 
-input[type="text"],
-input[type="tel"],
-input[type="email"],
+input,
 select {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
   background-color: #333;
-  border: none;
   color: #fff;
+  font-size: 16px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #00e676;
 }
 
 .telefono-input {
@@ -127,33 +172,34 @@ select {
 }
 
 .telefono-input input[type="text"] {
-  width: 50px;
+  width: 60px;
   margin-right: 5px;
 }
 
-.telefono-input input[type="tel"] {
-  flex-grow: 1;
-}
-
-button {
+.submit-btn,
+.volver-btn {
   width: 100%;
-  padding: 10px;
-  background-color: #0056b3;
+  padding: 12px;
+  background-color: #00c853;
   color: #fff;
   border: none;
+  border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
-  margin-top: 10px; /* Añadir espacio entre botones */
+  transition: background-color 0.3s ease;
+  margin-bottom: 15px;
 }
 
-button:hover {
-  background-color: #003d82;
-}
-
-.boton-volver {
-  background-color: #777; /* Color diferente para el botón Volver */
-}
-
-.boton-volver:hover {
+.submit-btn:hover,
+.volver-btn:hover {
   background-color: #555;
+  box-shadow:
+      0px 0px 10px #33ff5850,
+      0px 0px 40px #33ff5850,
+      0px 0px 60px #33ff5850;
+}
+
+.volver-btn {
+  margin-top: 10px;
 }
 </style>
