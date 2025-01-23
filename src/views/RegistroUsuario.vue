@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       usuario: {
-        nombre: "",
+        nombre: "", /*hola*/
         email: "",
         password: "",
       },
