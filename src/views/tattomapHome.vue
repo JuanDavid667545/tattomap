@@ -2,24 +2,24 @@
 <template>
 <div class="tattoo-map-home">
     <!-- Navegación -->
-    <nav class="nav-container">
-      <div class="nav-content">
-        <ul>
-          <li 
-            v-for="item in menuItems" 
-            :key="item.name"
-            :class="{ active: seleccion === item.route }"
-            @click="handleNavigation(item)"
-            class="nav-item"
+<nav class="nav-container">
+<div class="nav-content">
+    <ul>
+      <li 
+         v-for="item in menuItems" 
+          :key="item.name"
+          :class="{ active: seleccion === item.route }"
+          @click="handleNavigation(item)"
+          class="nav-item"
           >
             {{ item.name }}
-          </li>
-        </ul>
-      </div>
-    </nav>
+      </li>
+    </ul>
+</div>
+</nav>
 
-    <!-- Carrusel con transiciones -->
-    <div class="carrusel">
+<!-- Carrusel con transiciones -->
+<div class="carrusel">
       <transition-group name="fade">
         <img 
           v-for="(imagen, index) in imagenes" 
@@ -29,25 +29,25 @@
           :alt="`Imagen carrusel ${index + 1}`"
           class="carrusel-imagen"
         >
-      </transition-group>
-      <!-- Overlay gradiente -->
+</transition-group>
+<!-- Overlay gradiente -->
       <div class="carrusel-overlay"></div>
     </div>
 
-    <!-- Contenido principal -->
-    <main class="main-content">
-      <div class="content-wrapper">
-        <h1 class="animate-title">¿Quieres un tatuaje?</h1>
-        <p class="animate-text">TE FACILITAMOS ENCONTRANDOLO, CON QUIÉN Y DONDE</p>
-        <button 
+<!-- Contenido principal -->
+<main class="main-content">
+<div class="content-wrapper">
+      <h1 class="animate-title">¿Quieres un tatuaje?</h1>
+      <p class="animate-text">TE FACILITAMOS ENCONTRANDOLO, CON QUIÉN Y DONDE</p>
+          <button 
           @click="comenzarBusqueda"
-          class="main-button"
-        >
+          class="main-button">
           EMPEZAR
         </button>
-      </div>
+
+</div>
       
-      <!-- Elementos decorativos -->
+<!-- Elementos decorativos -->
       <div class="decorative-circle circle-1"></div>
       <div class="decorative-circle circle-2"></div>
     </main>
@@ -55,7 +55,13 @@
 </template>
 
 <script>
+
+
+
+
+
 export default {
+
   name: 'TattomapHome',
   data() {
     return {
@@ -75,17 +81,23 @@ export default {
       ]
     };
   },
+
+
   mounted() {
     // Agregar clase al body solo cuando este componente está montado
     document.body.classList.add('tattoo-home-page');
     this.iniciarCarrusel();
     this.iniciarAnimaciones();
   },
+
+
   beforeUnmount() {
     // Remover clase del body cuando el componente se desmonta
     document.body.classList.remove('tattoo-home-page');
     this.detenerCarrusel();
   },
+
+
   methods: {
     handleNavigation(item) {
       this.seleccion = item.route;
@@ -99,19 +111,26 @@ export default {
         console.log(`Navegando a: ${item.route}`);
       }
     },
+
     comenzarBusqueda() {
       console.log('Iniciando la búsqueda de tatuajes desde la página de inicio');
     },
+
+
     iniciarCarrusel() {
       this.intervalId = setInterval(() => {
         this.indiceActual = (this.indiceActual + 1) % this.imagenes.length;
       }, 5000);
     },
+
+
     detenerCarrusel() {
       if (this.intervalId) {
         clearInterval(this.intervalId);
       }
     },
+
+    
     iniciarAnimaciones() {
       // Las animaciones se manejan con CSS
     }
@@ -120,295 +139,9 @@ export default {
 </script>
 
 
-
-<style scoped>
-/* Estilos específicos para este componente */
-.tattoo-map-home {
-  background-color: #000;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  height: 100vh;
-  width: 100vw;
-  position: relative;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-}
-
-/* Navegación moderna y translúcida */
-.nav-container {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  width: auto;
-}
-
-.nav-content {
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
-  border-radius: 30px;
-  padding: 8px 15px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-nav ul {
-  list-style-type: none;
-  display: flex;
-  gap: 15px;
-  padding: 0;
-  margin: 0;
-  justify-content: center;
-}
-
-.nav-item {
-  cursor: pointer;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  color: rgba(255, 255, 255, 0.8);
-  background: transparent;
-  position: relative;
-  white-space: nowrap;
-  border: 1px solid transparent;
-}
-
-.nav-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.nav-item.active {
-  background-color: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-
-/* Carrusel */
-.carrusel {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-.carrusel-imagen {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.5;
-}
-
-.carrusel-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.8));
-}
-
-/* Animaciones del carrusel */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 1s ease;
-}
-
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
-}
-
-/* Contenido principal */
-.main-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-.content-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  max-width: 800px;
-}
-
-.animate-text {
-  display: inline-block;
-  font-size: 20px;
-  font-family: "Inter", sans-serif;
-  font-weight: bold;
-  margin-bottom: 20px;
-  background: linear-gradient(
-    90deg, 
-    #00e676 0%, 
-    #d7ccc8 20%, 
-    #00e676 40%, 
-    #d7ccc8 60%, 
-    #00e676 80%, 
-    #d7ccc8 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 15s linear infinite;
-}
-
-@keyframes shine {
-  to {
-    background-position: 200% center;
-  }
-}
-
-/* Para asegurarnos que no hay conflictos con otras animaciones */
-.animate-text {
-  animation: none; /* Elimina cualquier otra animación */
-  opacity: 1 !important;
-}
-
-.animate-text {
-  animation: shine 15s linear infinite !important;
-}
-
-
-.animate-title {
-  font-size: 68px;
-  font-family: "Pirata One", serif;
-  margin-bottom: 20px;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease forwards;
-}
-
-.main-button {
-  background-color: rgba(51, 51, 51, 0.8);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 15px 30px;
-  font-size: 18px;
-  cursor: pointer;
-  margin-top: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 15px #33ff5850;
-  transition: all 0.3s ease;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease 0.4s forwards;
-  backdrop-filter: blur(10px);
-}
-
-.main-button:hover {
-  box-shadow:
-   0px 0px 10px #33ff5850,
-   0px 0px 40px #33ff5850,
-   0px 0px 60px #33ff5850;
-}
-
-/* Elementos decorativos */
-.decorative-circle {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(40px);
-  opacity: 0.3;
-  animation: pulse 4s ease-in-out infinite;
-}
-
-.circle-1 {
-  bottom: 10%;
-  left: 10%;
-  width: 200px;
-  height: 200px;
-  background: rgba(147, 51, 234, 0.3);
-}
-
-.circle-2 {
-  top: 20%;
-  right: 10%;
-  width: 250px;
-  height: 250px;
-  background: rgba(59, 130, 246, 0.3);
-  animation-delay: -2s;
-}
-
-/* Animaciones keyframes */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.3;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.5;
-  }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .nav-content {
-    max-width: 90vw;
-    overflow-x: auto;
-    border-radius: 25px;
-  }
-
-  .nav-container {
-    width: 100%;
-    padding: 0 10px;
-  }
-
-  nav ul {
-    padding: 5px;
-    gap: 5px;
-  }
-
-  .nav-item {
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-
-  .animate-title {
-    font-size: 42px;
-  }
-  
-  .animate-text {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 480px) {
-  .animate-title {
-    font-size: 36px;
-  }
-
-  .nav-content {
-    padding: 8px;
-  }
-
-  .nav-item {
-    padding: 5px 10px;
-    font-size: 11px;
-  }
-}
+<style>
+@import '../styles/home.css';
 </style>
+
+
 
