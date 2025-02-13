@@ -2,14 +2,16 @@ import { createRouter, createWebHistory } from 'vue-router';
 import tattoRegister from '@/views/tattoRegister.vue';
 import tattomapHome from '@/views/tattomapHome.vue';
 import RegistroUsuario from '@/views/RegistroUsuario.vue';
-import contactenos from '@/views/contactenos.vue';
-
+import contactenos from '@/views/PaginaContactenos.vue';
+import RepositorioTatu from '@/views/RepositorioTatu.vue';
 // Definición correcta de rutas
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: tattomapHome,
+    meta: { hideSidebar: true }
+    
   },
   {
     path: '/registro',
@@ -26,6 +28,18 @@ const routes = [
     name: 'contactenos',
     component: contactenos
   },
+
+  {
+    path: '/RepositorioTatu',
+    name: 'repositorioTatu',
+    component: RepositorioTatu
+  }
+
+
+
+ 
+
+
 ];
 
 

@@ -2,7 +2,10 @@
 <template>
 <div class="tattoo-map-home">
     <!-- Navegación -->
+
+
 <nav class="nav-container">
+  
 <div class="nav-content">
     <ul>
       <li 
@@ -54,15 +57,20 @@
   </div>
 </template>
 
+
+
+
+
 <script>
-
-
-
-
+import mixin from '@/mixin';
 
 export default {
 
+
+
+
   name: 'TattomapHome',
+  mixins: [mixin], 
   data() {
     return {
       seleccion: '',
@@ -73,7 +81,7 @@ export default {
       indiceActual: 0,
       intervalId: null,
       menuItems: [
-        { name: 'TATUADORES', route: 'tatuadores' },
+      { name: 'TATUADORES', route: 'RepositorioTatu' },
         { name: 'TATUAJES', route: 'tatuajes' },
         { name: '¿TATÚAS?', route: 'tatuas' },
         { name: 'CONTÁCTENOS', route: 'contactenos' },
@@ -86,6 +94,7 @@ export default {
   mounted() {
     // Agregar clase al body solo cuando este componente está montado
     document.body.classList.add('tattoo-home-page');
+
     this.iniciarCarrusel();
     this.iniciarAnimaciones();
   },
@@ -94,6 +103,7 @@ export default {
   beforeUnmount() {
     // Remover clase del body cuando el componente se desmonta
     document.body.classList.remove('tattoo-home-page');
+
     this.detenerCarrusel();
   },
 
@@ -103,11 +113,18 @@ export default {
       this.seleccion = item.route;
       if (item.route === 'tatuas') {
         this.$router.push('/registro');
-      } else if (item.route === 'registro') {
+
+      } 
+      else if (item.route === 'registro') {
         this.$router.push('/registro-usuario');
-      } else if (item.route === 'contactenos') {
+      } 
+      else if (item.route === 'contactenos') {
         this.$router.push('/Contactenos');
-      } else {
+      } 
+      else if(item.route === 'RepositorioTatu'){
+  this.$router.push('/RepositorioTatu');
+      }
+      else {
         console.log(`Navegando a: ${item.route}`);
       }
     },
@@ -131,10 +148,14 @@ export default {
     },
 
     
-    iniciarAnimaciones() {
+   iniciarAnimaciones() {
       // Las animaciones se manejan con CSS
     }
-  }
+
+  },
+
+ 
+  
 };
 </script>
 
